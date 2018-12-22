@@ -1,5 +1,5 @@
-rootProject.name = 'concis-job'
-include 'concis-core'
-include 'concis-manager'
-include 'concis-samples'
+rootProject.name = 'concise-job'
+include 'concise-core'
+include 'concise-manager'
+include 'concise-samples'
 
