@@ -1,0 +1,40 @@
+buildscript {
+    ext {
+
+    }
+}
+
+group 'com.lls'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile 'javax.servlet:javax.servlet-api:4.0.1'
+    compile 'javax.servlet.jsp:jsp-api:2.2'
+    compile 'org.eclipse.jetty:jetty-server:9.4.11.v20180605'
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'com.caucho:hessian:4.0.51'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
+    compile 'org.apache.httpcomponents:httpclient:4.5.6'
+    compile 'org.springframework:spring-context:4.3.18.RELEASE'
+    compile 'org.codehaus.groovy:groovy-all:2.4.15'
+    compile 'org.apache.commons:commons-exec:1.3'
+
+}

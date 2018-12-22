@@ -1,0 +1,50 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+    }
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'idea'
+
+group 'com.lls'
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    mavenLocal()
+    mavenCentral()
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-aop")
+    compile("org.springframework.boot:spring-boot-starter-freemarker")
+    compile ('org.slf4j:slf4j-api:1.7.25')
+    compile ('org.apache.commons:commons-collections4:4.1')
+    compile ('org.apache.commons:commons-lang3:3.7')
+    compile ('org.apache.commons:commons-email:1.5')
+    compile ('commons-codec:commons-codec:1.11')
+    compile("mysql:mysql-connector-java:5.1.47")
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1")
+    compile ('org.quartz-scheduler:quartz:2.3.0')
+
+    compile project(":concis-core")
+
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+

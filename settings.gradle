@@ -1,0 +1,5 @@
+rootProject.name = 'concis-job'
+include 'concis-core'
+include 'concis-manager'
+include 'concis-samples'
+
