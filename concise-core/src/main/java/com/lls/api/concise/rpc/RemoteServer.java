@@ -1,5 +1,7 @@
 package com.lls.api.concise.rpc;
 
+import com.lls.api.concise.exception.RemotingException;
+
 /************************************
  * RemoteServer
  * @author liliangshan
@@ -7,6 +9,12 @@ package com.lls.api.concise.rpc;
  ************************************/
 public interface RemoteServer {
 
+    void start() throws RemotingException;
 
+    void destroy();
+
+    boolean isStarted();
+
+    boolean isDestroy();
 
 }
