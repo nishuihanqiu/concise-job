@@ -2,7 +2,7 @@ package com.lls.api.concise.worker;
 
 import com.lls.api.concise.job.JobContext;
 import com.lls.api.concise.logging.LoggingLevel;
-import com.lls.api.concise.rpc.RemotingClient;
+import com.lls.api.concise.rpc.RemoteClient;
 import com.lls.api.concise.runner.RunnerFactory;
 import com.lls.api.concise.runner.RunnerPool;
 
@@ -13,7 +13,7 @@ import com.lls.api.concise.runner.RunnerPool;
  ************************************/
 public class WorkerContext extends JobContext {
 
-  private RemotingClient remotingClient;
+  private RemoteClient remoteClient;
 
   private RunnerPool runnerPool;
 
@@ -24,12 +24,12 @@ public class WorkerContext extends JobContext {
   private LoggingLevel level;
 
 
-  public RemotingClient getRemotingClient() {
-    return remotingClient;
+  public RemoteClient getRemoteClient() {
+    return remoteClient;
   }
 
-  public void setRemotingClient(RemotingClient remotingClient) {
-    this.remotingClient = remotingClient;
+  public void setRemoteClient(RemoteClient remoteClient) {
+    this.remoteClient = remoteClient;
   }
 
   public RunnerPool getRunnerPool() {

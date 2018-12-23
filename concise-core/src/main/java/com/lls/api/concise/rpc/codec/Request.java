@@ -12,7 +12,7 @@ public class Request implements Serializable {
 
     private static final long serialVersionUID = 1223488488888L;
 
-    private String address;
+    private String serverAddress;
     private long createdAt;
     private String accessToken;
     private String className;
@@ -20,12 +20,12 @@ public class Request implements Serializable {
     private Object[] parameters;
     private Class<?>[] parameterTypes;
 
-    public String getAddress() {
-        return address;
+    public String getServerAddress() {
+        return serverAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setServerAddress(String serverAddress) {
+        this.serverAddress = serverAddress;
     }
 
     public long getCreatedAt() {
@@ -79,7 +79,7 @@ public class Request implements Serializable {
     @Override
     public String toString() {
         return "Request{" +
-            "address='" + address + '\'' +
+            "serverAddress='" + serverAddress + '\'' +
             ", createdAt=" + createdAt +
             ", accessToken='" + accessToken + '\'' +
             ", className='" + className + '\'' +

@@ -13,24 +13,28 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /************************************
- * RemotingContext
+ * RemoteContext
  * @author liliangshan
  * @date 2018/12/23
  ************************************/
-public class RemotingContext {
+public class RemoteContext {
 
-    private static final Logger logger = LoggerFactory.getLogger(RemotingContext.class);
+    private static final Logger logger = LoggerFactory.getLogger(RemoteContext.class);
 
-    private static ConcurrentMap<String, Object> services = new ConcurrentHashMap<>();
-    private static String accessToken;
+    private ConcurrentMap<String, Object> services = new ConcurrentHashMap<>();
+    private String accessToken;
     private static final long DEFAULT_REQUEST_MAX_TIME = 180000;
 
-    public static void putService(Class<?> clazz, Object serviceBean) {
+    public void putService(Class<?> clazz, Object serviceBean) {
         services.put(clazz.getName(), serviceBean);
     }
 
-    public static void setAccessToken(String accessToken) {
-        RemotingContext.accessToken = accessToken;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
     }
 
     public Response invoke(Request request, Object serviceBean) {

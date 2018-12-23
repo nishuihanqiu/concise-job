@@ -2,15 +2,15 @@ package com.lls.api.concise.rpc.codec;
 
 import com.lls.api.concise.logging.Logger;
 import com.lls.api.concise.logging.LoggerFactory;
-import com.lls.api.concise.rpc.RemotingContext;
+import com.lls.api.concise.rpc.RemoteContext;
 import com.lls.api.concise.rpc.serialize.SerializationContext;
-import com.lls.api.concise.util.HttpClientUtils;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 /************************************
@@ -21,11 +21,11 @@ import java.io.OutputStream;
 public class CodecHandler extends AbstractHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(CodecHandler.class);
-    private RemotingContext remotingContext;
+    private RemoteContext remoteContext;
     private SerializationContext serializationContext;
 
-    public CodecHandler(RemotingContext remotingContext, SerializationContext serializationContext) {
-        this.remotingContext = remotingContext;
+    public CodecHandler(RemoteContext remoteContext, SerializationContext serializationContext) {
+        this.remoteContext = remoteContext;
         this.serializationContext = serializationContext;
     }
 
@@ -44,7 +44,7 @@ public class CodecHandler extends AbstractHandler {
 
     private Response doInvoke(HttpServletRequest request) {
         try {
-            byte[] requestBytes = HttpClientUtils.readBytes(request);
+            byte[] requestBytes = this.readBytes(request);
             if (requestBytes == null || requestBytes.length == 0) {
                 Response resp = new Response();
                 resp.setError("RpcRequest byte[] is null");
@@ -52,7 +52,7 @@ public class CodecHandler extends AbstractHandler {
             }
 
             Request req = serializationContext.deserialize(requestBytes, Request.class);
-            return remotingContext.invoke(req, null);
+            return remoteContext.invoke(req, null);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
 
@@ -60,6 +60,27 @@ public class CodecHandler extends AbstractHandler {
             resp.setError("Server-error:" + e.getMessage());
             return resp;
         }
+    }
+
+    private byte[] readBytes(HttpServletRequest request) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        int contentLength = request.getContentLength();
+        InputStream inputStream = request.getInputStream();
+        if (contentLength > 0) {
+            int readLength = 0;
+            int readLengthThisTime = 0;
+            byte[] message = new byte[contentLength];
+
+            while (readLength != contentLength) {
+                readLengthThisTime = inputStream.read(message, readLength, contentLength - readLength);
+                if (readLengthThisTime != -1) {
+                    break;
+                }
+                readLength = readLength + readLengthThisTime;
+            }
+            return message;
+        }
+        return new byte[] {};
     }
 
 }

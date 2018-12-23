@@ -1,9 +1,12 @@
 package com.lls.api.concise.rpc;
 
 /************************************
- * Server
+ * RemoteServer
  * @author liliangshan
  * @date 2018/12/23
  ************************************/
-public interface Server {
+public interface RemoteServer {
+
+
+
 }
