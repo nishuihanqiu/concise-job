@@ -1,8 +1,10 @@
 package com.lls.api.concise.rpc;
 
+import com.lls.api.concise.core.Configuration;
 import com.lls.api.concise.exception.RemotingException;
 import com.lls.api.concise.logging.Logger;
 import com.lls.api.concise.logging.LoggerFactory;
+import com.lls.api.concise.worker.WorkerContext;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -16,9 +18,20 @@ public abstract class AbstractRemoteServer implements RemoteServer {
     private static final Logger logger = LoggerFactory.getLogger(AbstractRemoteServer.class);
 
     protected AtomicBoolean started = new AtomicBoolean(false);
+    protected Configuration configuration;
+    protected WorkerContext workerContext;
+    protected RemoteContext remoteContext;
 
-    public AbstractRemoteServer() {
+    public AbstractRemoteServer(Configuration configuration, WorkerContext context) {
+        this.configuration = configuration;
+        this.workerContext = context;
+        this.remoteContext = this.buildRemoteContext(configuration);
+    }
 
+    private RemoteContext buildRemoteContext(Configuration configuration) {
+        RemoteContext remoteContext = new RemoteContext(configuration.getAccessToken());
+        remoteContext.setRequestMaxIntervalTime(configuration.getMaxRequestIntervalTime());
+        return remoteContext;
     }
 
     @Override
@@ -30,7 +43,7 @@ public abstract class AbstractRemoteServer implements RemoteServer {
                 afterServerStart();
             }
         } catch (Throwable e) {
-            logger.error("start failed message:" + e.getMessage(), e);
+            logger.error("start remote server failed message:" + e.getMessage(), e);
             throw new RemotingException(e.getMessage(), e);
         }
     }
@@ -44,7 +57,7 @@ public abstract class AbstractRemoteServer implements RemoteServer {
                 afterServerDestroy();
             }
         } catch (Throwable e) {
-            logger.error("destroy failed message:" + e.getMessage(), e);
+            logger.error("destroy remote server failed message:" + e.getMessage(), e);
             throw new RemotingException(e.getMessage(), e);
         }
     }

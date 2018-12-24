@@ -1,6 +1,4 @@
-package com.lls.api.concise.core;
-
-import com.lls.api.concise.registry.NotifyEventListener;
+package com.lls.api.concise.registry;
 
 /************************************
  * Registry
@@ -9,9 +7,9 @@ import com.lls.api.concise.registry.NotifyEventListener;
  ************************************/
 public interface Registry {
 
-  void registry(RegistryConfig config);
+  void register(RegistryConfig config);
 
-  void unregistry(RegistryConfig config);
+  void unregister(RegistryConfig config);
 
   void subscribe(RegistryConfig config, NotifyEventListener listener);
 

@@ -21,20 +21,28 @@ public class RemoteContext {
 
     private static final Logger logger = LoggerFactory.getLogger(RemoteContext.class);
 
-    private ConcurrentMap<String, Object> services = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, Object> services = new ConcurrentHashMap<>();
     private String accessToken;
-    private static final long DEFAULT_REQUEST_MAX_TIME = 180000;
+    private long requestMaxIntervalTime;
+
+    public RemoteContext(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
     public void putService(Class<?> clazz, Object serviceBean) {
         services.put(clazz.getName(), serviceBean);
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
     public String getAccessToken() {
         return accessToken;
+    }
+
+    public void setRequestMaxIntervalTime(long requestMaxIntervalTime) {
+        this.requestMaxIntervalTime = requestMaxIntervalTime;
+    }
+
+    public long getRequestMaxIntervalTime() {
+        return requestMaxIntervalTime;
     }
 
     public Response invoke(Request request, Object serviceBean) {
@@ -43,7 +51,7 @@ public class RemoteContext {
         }
 
         Response response = new Response();
-        if (System.currentTimeMillis() - request.getCreatedAt() > DEFAULT_REQUEST_MAX_TIME) {
+        if (System.currentTimeMillis() - request.getCreatedAt() > this.requestMaxIntervalTime) {
             response.setResult(new Result(Action.FAILED, "request timeout."));
             return response;
         }

@@ -11,16 +11,21 @@ import com.lls.api.concise.worker.WorkerContext;
  ************************************/
 public class DefaultRunnerFactory implements RunnerFactory {
 
-  private static final Logger logger = LoggerFactory.getLogger(DefaultRunnerFactory.class);
-  private WorkerContext context;
+    private static final Logger logger = LoggerFactory.getLogger(DefaultRunnerFactory.class);
+    private WorkerContext context;
 
-  public DefaultRunnerFactory(WorkerContext context) {
-    this.context = context;
-  }
+    public DefaultRunnerFactory(WorkerContext context) {
+        this.context = context;
+    }
 
-  @Override
-  public Runner newRunner() {
-    return null;
-  }
+    @Override
+    public Runner newRunner() {
+        try {
+            return (Runner) context.getJobRunnerClazz().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            logger.error(e.getMessage(), e);
+        }
+        return null;
+    }
 
 }

@@ -7,6 +7,13 @@ package com.lls.api.concise.core;
  ************************************/
 public class Context {
 
+    private Configuration configuration;
 
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
+    }
 
+    public Configuration getConfiguration() {
+        return configuration;
+    }
 }

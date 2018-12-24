@@ -1,5 +1,7 @@
 package com.lls.api.concise.runner;
 
+import com.lls.api.concise.rpc.codec.Response;
+
 /************************************
  * RunnerListener
  * @author liliangshan
@@ -7,8 +9,8 @@ package com.lls.api.concise.runner;
  ************************************/
 public interface RunnerListener {
 
-  void onCompleted();
+  void onCompleted(Response response);
 
-  void onFailed();
+  void onFailed(Response response, Throwable t);
 
 }

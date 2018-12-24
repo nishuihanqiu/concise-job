@@ -1,9 +1,12 @@
 package com.lls.api.concise.core;
 
 /************************************
- * RegistryConfig
+ * NodeType
  * @author liliangshan
- * @date 2018/12/23
+ * @date 2018/12/24
  ************************************/
-public class RegistryConfig {
+public enum NodeType {
+
+    CLIENT,
+    CENTER;
 }

@@ -1,5 +1,7 @@
 package com.lls.api.concise.rpc.codec;
 
+import com.lls.api.concise.job.Action;
+
 import java.io.Serializable;
 
 /************************************
@@ -11,6 +13,7 @@ public class Response implements Serializable {
 
     private static final long serivalVersionUID = 3839232738484838L;
 
+    private Action action;
     private String error;
     private Object result;
 
@@ -32,5 +35,13 @@ public class Response implements Serializable {
 
     public void setResult(Object result) {
         this.result = result;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public Action getAction() {
+        return action;
     }
 }
