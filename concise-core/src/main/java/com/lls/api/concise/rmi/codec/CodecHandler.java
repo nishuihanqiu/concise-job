@@ -1,9 +1,9 @@
-package com.lls.api.concise.rpc.codec;
+package com.lls.api.concise.rmi.codec;
 
 import com.lls.api.concise.logging.Logger;
 import com.lls.api.concise.logging.LoggerFactory;
-import com.lls.api.concise.rpc.RemoteContext;
-import com.lls.api.concise.rpc.serialize.SerializationContext;
+import com.lls.api.concise.rmi.RemoteContext;
+import com.lls.api.concise.rmi.serialize.SerializationContext;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import javax.servlet.ServletException;

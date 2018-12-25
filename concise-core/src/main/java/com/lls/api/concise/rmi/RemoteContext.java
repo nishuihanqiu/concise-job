@@ -1,11 +1,11 @@
-package com.lls.api.concise.rpc;
+package com.lls.api.concise.rmi;
 
 import com.lls.api.concise.core.Result;
 import com.lls.api.concise.job.Action;
 import com.lls.api.concise.logging.Logger;
 import com.lls.api.concise.logging.LoggerFactory;
-import com.lls.api.concise.rpc.codec.Request;
-import com.lls.api.concise.rpc.codec.Response;
+import com.lls.api.concise.rmi.codec.Request;
+import com.lls.api.concise.rmi.codec.Response;
 import org.springframework.cglib.reflect.FastClass;
 import org.springframework.cglib.reflect.FastMethod;
 

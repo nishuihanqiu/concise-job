@@ -13,29 +13,5 @@ public class JobWorker extends AbstractJobWorker {
         super(configuration);
     }
 
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void stop() {
-
-    }
-
-    @Override
-    public void destroy() {
-
-    }
-
-    @Override
-    public void isStarted() {
-
-    }
-
-    @Override
-    public void isStopped() {
-
-    }
 
 }

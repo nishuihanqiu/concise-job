@@ -1,6 +1,6 @@
 package com.lls.api.concise.runner;
 
-import com.lls.api.concise.rpc.codec.Response;
+import com.lls.api.concise.rmi.codec.Response;
 
 /************************************
  * RunnerListener

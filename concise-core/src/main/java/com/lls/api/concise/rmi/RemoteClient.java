@@ -1,8 +1,8 @@
-package com.lls.api.concise.rpc;
+package com.lls.api.concise.rmi;
 
 import com.lls.api.concise.exception.RemotingException;
-import com.lls.api.concise.rpc.codec.Request;
-import com.lls.api.concise.rpc.codec.Response;
+import com.lls.api.concise.rmi.codec.Request;
+import com.lls.api.concise.rmi.codec.Response;
 
 /************************************
  * RemoteClient

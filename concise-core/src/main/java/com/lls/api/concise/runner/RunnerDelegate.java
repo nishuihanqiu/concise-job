@@ -7,7 +7,7 @@ import com.lls.api.concise.job.JobContext;
 import com.lls.api.concise.job.JobExtInfo;
 import com.lls.api.concise.logging.Logger;
 import com.lls.api.concise.logging.LoggerFactory;
-import com.lls.api.concise.rpc.codec.Response;
+import com.lls.api.concise.rmi.codec.Response;
 import com.lls.api.concise.worker.WorkerContext;
 import sun.nio.ch.Interruptible;
 

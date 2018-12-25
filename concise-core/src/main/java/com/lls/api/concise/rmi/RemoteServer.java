@@ -1,4 +1,4 @@
-package com.lls.api.concise.rpc;
+package com.lls.api.concise.rmi;
 
 import com.lls.api.concise.exception.RemotingException;
 

@@ -1,11 +1,11 @@
-package com.lls.api.concise.rpc;
+package com.lls.api.concise.rmi;
 
 import com.lls.api.concise.core.Configuration;
 import com.lls.api.concise.exception.RemotingException;
 import com.lls.api.concise.logging.Logger;
 import com.lls.api.concise.logging.LoggerFactory;
-import com.lls.api.concise.rpc.codec.CodecHandler;
-import com.lls.api.concise.rpc.serialize.SerializationContext;
+import com.lls.api.concise.rmi.codec.CodecHandler;
+import com.lls.api.concise.rmi.serialize.SerializationContext;
 import com.lls.api.concise.util.HelperUtils;
 import com.lls.api.concise.worker.WorkerContext;
 import org.eclipse.jetty.server.Connector;

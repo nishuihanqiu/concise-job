@@ -1,12 +1,12 @@
 package com.lls.api.concise.core;
 
 /************************************
- * NodeType
+ * JobClient
  * @author liliangshan
- * @date 2018/12/24
+ * @date 2018/12/25
  ************************************/
-public enum NodeType {
+public interface JobClient {
 
-    CLIENT,
-    CENTER;
+
+
 }

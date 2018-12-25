@@ -1,4 +1,4 @@
-package com.lls.api.concise.rpc.codec;
+package com.lls.api.concise.rmi.codec;
 
 import com.lls.api.concise.job.Action;
 

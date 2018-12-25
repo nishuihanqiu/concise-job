@@ -1,10 +1,10 @@
 package com.lls.api.concise.worker;
 
 import com.lls.api.concise.core.Context;
-import com.lls.api.concise.core.NodeConfig;
+import com.lls.api.concise.registry.NodeConfig;
 import com.lls.api.concise.logging.LoggingLevel;
-import com.lls.api.concise.rpc.RemoteClient;
-import com.lls.api.concise.rpc.serialize.SerializationContext;
+import com.lls.api.concise.rmi.RemoteClient;
+import com.lls.api.concise.rmi.serialize.SerializationContext;
 import com.lls.api.concise.runner.RunnerFactory;
 import com.lls.api.concise.runner.RunnerPool;
 

@@ -1,4 +1,4 @@
-package com.lls.api.concise.core;
+package com.lls.api.concise.registry;
 
 import java.io.Serializable;
 

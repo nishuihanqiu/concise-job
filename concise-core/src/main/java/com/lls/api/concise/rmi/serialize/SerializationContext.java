@@ -1,4 +1,4 @@
-package com.lls.api.concise.rpc.serialize;
+package com.lls.api.concise.rmi.serialize;
 
 import java.io.IOException;
 

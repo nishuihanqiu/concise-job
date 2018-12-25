@@ -36,6 +36,7 @@ public abstract class AbstractRegistry implements Registry {
             logger.info("register config:{}", config);
         }
         registered.add(config);
+        this.doRegistered(config);
     }
 
     @Override
@@ -47,6 +48,7 @@ public abstract class AbstractRegistry implements Registry {
             logger.info("unregister config:{}", config);
         }
         registered.remove(config);
+        this.doUnregistered(config);
     }
 
     @Override
@@ -67,6 +69,7 @@ public abstract class AbstractRegistry implements Registry {
             listeners = subscribed.get(config);
         }
         listeners.add(listener);
+        this.doSubscribed(config, listener);
     }
 
     @Override
@@ -86,6 +89,7 @@ public abstract class AbstractRegistry implements Registry {
         if (listeners != null) {
             listeners.remove(listener);
         }
+        this.doUnsubscribed(config, listener);
     }
 
     @Override
@@ -156,4 +160,14 @@ public abstract class AbstractRegistry implements Registry {
             }
         }
     }
+
+
+    protected abstract void doRegistered(RegistryConfig registryConfig);
+
+    protected abstract void doUnregistered(RegistryConfig registryConfig);
+
+    protected abstract void doSubscribed(RegistryConfig config, NotifyEventListener listener);
+
+    protected abstract void doUnsubscribed(RegistryConfig config, NotifyEventListener listener);
+
 }

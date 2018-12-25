@@ -9,12 +9,10 @@ public interface Worker {
 
   void start();
 
-  void stop();
-
   void destroy();
 
-  void isStarted();
+  boolean isStarted();
 
-  void isStopped();
+  boolean isDestroy();
 
 }

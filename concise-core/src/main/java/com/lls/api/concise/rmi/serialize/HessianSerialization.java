@@ -1,25 +1,26 @@
-package com.lls.api.concise.rpc.serialize;
+package com.lls.api.concise.rmi.serialize;
 
-import com.caucho.hessian.io.Hessian2Input;
-import com.caucho.hessian.io.Hessian2Output;
+import com.caucho.hessian.io.HessianInput;
+import com.caucho.hessian.io.HessianOutput;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /************************************
- * Hessian2Serialization
+ * HessianSerialization
  * @author liliangshan
  * @date 2018/12/23
  ************************************/
-public class Hessian2Serialization implements Serialization {
+public class HessianSerialization implements Serialization {
+
 
     @Override
     public byte[] serialize(Object obj) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        Hessian2Output hessian2Output = new Hessian2Output(outputStream);
-        hessian2Output.writeObject(obj);
-        hessian2Output.flush();
+        HessianOutput hessianOutput = new HessianOutput(outputStream);
+        hessianOutput.writeObject(obj);
+        hessianOutput.flush();
         return outputStream.toByteArray();
     }
 
@@ -27,35 +28,37 @@ public class Hessian2Serialization implements Serialization {
     @Override
     public <T> T deserialize(byte[] bytes, Class<T> clz) throws IOException {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
-        Hessian2Input hessian2Input = new Hessian2Input(inputStream);
-        return (T) hessian2Input.readObject();
+        HessianInput hessianInput = new HessianInput(inputStream);
+        return (T) hessianInput.readObject();
     }
 
     @Override
     public byte[] batchSerialize(Object[] data) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        Hessian2Output hessian2Output = new Hessian2Output(outputStream);
+        HessianOutput hessianOutput = new HessianOutput(outputStream);
         for (Object item : data) {
-            hessian2Output.writeObject(item);
+            hessianOutput.writeObject(item);
         }
-        hessian2Output.flush();
+        hessianOutput.flush();
         return outputStream.toByteArray();
     }
 
     @Override
     public Object[] batchDeserialize(byte[] data, Class<?>[] classes) throws IOException {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
-        Hessian2Input hessian2Input = new Hessian2Input(inputStream);
+        HessianInput hessianInput = new HessianInput(inputStream);
         Object[] objects = new Object[classes.length];
-        for (int i = 0; i < objects.length; i++) {
-            objects[i] = hessian2Input.readObject(classes[i]);
+        for (int i = 0; i < classes.length; i++) {
+            objects[i] = hessianInput.readObject(classes[i]);
         }
         return objects;
     }
 
     @Override
     public int getSerializeVersion() {
-        return SerializationVersion.HESSIAN_2.getVersion();
+        return SerializationVersion.HESSIAN_1.getVersion();
     }
+
+
 
 }

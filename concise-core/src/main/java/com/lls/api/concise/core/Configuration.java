@@ -1,5 +1,8 @@
 package com.lls.api.concise.core;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /************************************
  * Configuration
  * @author liliangshan
@@ -15,6 +18,9 @@ public class Configuration {
     private String loggingPath;
     private long loggingLiveMills;
     private long maxRequestIntervalTime;
+    private long retryPeriod;
+    private int serializationVersion;
+    private final Map<String, String> parameters = new HashMap<>();
 
     public Configuration(Builder builder) {
         this.address = builder.address;
@@ -25,6 +31,8 @@ public class Configuration {
         this.loggingPath = builder.loggingPath;
         this.loggingLiveMills = builder.loggingLiveMills;
         this.maxRequestIntervalTime = builder.maxRequestIntervalTime;
+        this.retryPeriod = builder.retryPeriod;
+        this.serializationVersion = builder.serializationVersion;
     }
 
     public String getAddress() {
@@ -91,9 +99,46 @@ public class Configuration {
         return maxRequestIntervalTime;
     }
 
+    public void setRetryPeriod(long retryPeriod) {
+        this.retryPeriod = retryPeriod;
+    }
+
+    public long getRetryPeriod() {
+        return retryPeriod;
+    }
+
+    public void setSerializationVersion(int serializationVersion) {
+        this.serializationVersion = serializationVersion;
+    }
+
+    public int getSerializationVersion() {
+        return serializationVersion;
+    }
+
+    public Map<String, String> getParameters() {
+        return parameters;
+    }
+
+    public void putParameter(String key, String value) {
+        parameters.put(key, value);
+    }
+
+    public String getParameter(String key) {
+        return parameters.get(key);
+    }
+
+    public String getParameter(String key, String defaultValue) {
+        String value = parameters.get(key);
+        if (value == null) {
+            return defaultValue;
+        }
+        return value;
+    }
+
     public static final class Builder {
 
         private static final long DEFAULT_REQUEST_MAX_TIME = 180000;
+        private static final long DEFAULT_RETRY_MILLS_TIME = 5000;
 
         private String address;
         private String name;
@@ -103,6 +148,8 @@ public class Configuration {
         private String loggingPath;
         private Long loggingLiveMills;
         private Long maxRequestIntervalTime;
+        private Long retryPeriod;
+        private Integer serializationVersion;
 
         public Builder() {
             this.address = null;
@@ -113,6 +160,8 @@ public class Configuration {
             this.loggingPath = null;
             this.loggingLiveMills = null;
             this.maxRequestIntervalTime = DEFAULT_REQUEST_MAX_TIME;
+            this.retryPeriod = DEFAULT_RETRY_MILLS_TIME;
+            this.serializationVersion = 0;
         }
 
         public Builder(Configuration configuration) {
@@ -124,6 +173,8 @@ public class Configuration {
             this.loggingPath = configuration.getLoggingPath();
             this.loggingLiveMills = configuration.getLoggingLiveMills();
             this.maxRequestIntervalTime = configuration.getMaxRequestIntervalTime();
+            this.retryPeriod = configuration.getRetryPeriod();
+            this.serializationVersion = configuration.getSerializationVersion();
         }
 
         public Builder buildAddress(String address) {
@@ -163,6 +214,16 @@ public class Configuration {
 
         public Builder buildMaxRequestIntervalTime(long maxRequestIntervalTime) {
             this.maxRequestIntervalTime = maxRequestIntervalTime;
+            return this;
+        }
+
+        public Builder buildRetryPeriod(long retryPeriod) {
+            this.retryPeriod = retryPeriod;
+            return this;
+        }
+
+        public Builder buildSerializationVersion(int version) {
+            this.serializationVersion = version;
             return this;
         }
 

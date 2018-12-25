@@ -1,4 +1,4 @@
-package com.lls.api.concise.rpc.codec;
+package com.lls.api.concise.rmi.codec;
 
 import java.io.Serializable;
 import java.util.Arrays;

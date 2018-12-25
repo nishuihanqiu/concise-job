@@ -1,11 +1,11 @@
-package com.lls.api.concise.rpc;
+package com.lls.api.concise.rmi;
 
 import com.lls.api.concise.exception.RemotingException;
 import com.lls.api.concise.logging.Logger;
 import com.lls.api.concise.logging.LoggerFactory;
-import com.lls.api.concise.rpc.codec.Request;
-import com.lls.api.concise.rpc.codec.Response;
-import com.lls.api.concise.rpc.serialize.SerializationContext;
+import com.lls.api.concise.rmi.codec.Request;
+import com.lls.api.concise.rmi.codec.Response;
+import com.lls.api.concise.rmi.serialize.SerializationContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
