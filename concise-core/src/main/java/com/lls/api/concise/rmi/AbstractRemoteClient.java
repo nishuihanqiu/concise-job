@@ -3,6 +3,7 @@ package com.lls.api.concise.rmi;
 import com.lls.api.concise.exception.RemotingException;
 import com.lls.api.concise.logging.Logger;
 import com.lls.api.concise.logging.LoggerFactory;
+import com.lls.api.concise.rmi.serialize.SerializationContext;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -16,9 +17,10 @@ public abstract class AbstractRemoteClient implements RemoteClient {
     private static final Logger logger = LoggerFactory.getLogger(RemoteClient.class);
 
     protected AtomicBoolean started = new AtomicBoolean(false);
+    protected SerializationContext serializationContext;
 
-    public AbstractRemoteClient() {
-
+    public AbstractRemoteClient(SerializationContext context) {
+        this.serializationContext = context;
     }
 
     @Override

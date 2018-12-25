@@ -19,12 +19,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
  ************************************/
 public abstract class AbstractJobWorker implements Worker {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected WorkerContext workerContext;
-    protected RemoteServer remoteServer;
-    protected WorkerRegistry workerRegistry;
     protected Configuration configuration;
+    protected NodeConfig config;
     protected AtomicBoolean started = new AtomicBoolean(false);
 
 
@@ -32,8 +31,7 @@ public abstract class AbstractJobWorker implements Worker {
         this.configuration = configuration;
         workerContext = this.generateWorkerContext();
         workerContext.setConfiguration(configuration);
-        NodeConfig nodeConfig = this.createNodeConfig(configuration);
-        workerContext.setNodeConfig(nodeConfig);
+        workerContext.setNodeConfig(this.createNodeConfig(configuration));
         SerializationContext serializationContext = new SerializationContext(createSerialization(configuration));
         workerContext.setSerializationContext(serializationContext);
     }
@@ -43,7 +41,7 @@ public abstract class AbstractJobWorker implements Worker {
     }
 
     private NodeConfig createNodeConfig(Configuration configuration) {
-        NodeConfig config = new NodeConfig();
+        config = new NodeConfig();
         config.setAvailable(true);
         config.setWorkThreads(64);
         config.setNodeGroup("concise-job");
@@ -60,29 +58,48 @@ public abstract class AbstractJobWorker implements Worker {
     final public void start() {
         try {
             if (started.compareAndSet(false, true)) {
-                initRegistry();
+                beforeStart();
+                onStart();
+                afterStart();
             }
         } catch (Throwable t) {
             logger.error("start failed ");
         }
     }
 
-    private void initRegistry() {
-
-    }
-
     @Override
     final public void destroy() {
-
+        try {
+            if (started.compareAndSet(true, false)) {
+                beforeDestroy();
+                onDestroy();
+                afterDestroy();
+            }
+        } catch (Throwable t) {
+            logger.error("destroy failed.");
+        }
     }
+
+    protected abstract void beforeStart();
+
+    protected abstract void onStart();
+
+    protected abstract void afterStart();
+
+    protected abstract void beforeDestroy();
+
+    protected abstract void onDestroy();
+
+    protected abstract void afterDestroy();
 
     @Override
     public boolean isStarted() {
-        return false;
+        return started.get();
     }
 
     @Override
     public boolean isDestroy() {
-        return false;
+        return !started.get();
     }
+
 }

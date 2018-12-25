@@ -29,11 +29,11 @@ public class JettyRemoteClient extends AbstractRemoteClient {
     private static final Logger logger = LoggerFactory.getLogger(JettyRemoteClient.class);
     private CloseableHttpClient httpClient;
     private RequestConfig config;
-    private SerializationContext serializationContext;
+
     private HttpPost httpPost;
 
     public JettyRemoteClient(SerializationContext context) {
-        this.serializationContext = context;
+        super(context);
     }
 
     @Override

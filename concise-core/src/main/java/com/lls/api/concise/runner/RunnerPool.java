@@ -38,7 +38,7 @@ public class RunnerPool {
     private ThreadPoolExecutor initThreadPoolExecutor() {
         int workThreads = workerContext.getNodeConfig().getWorkThreads();
         return new ThreadPoolExecutor(workThreads, workThreads, 30, TimeUnit.SECONDS,
-            new SynchronousQueue<Runnable>(),           // 直接提交给线程而不保持它们
+            new SynchronousQueue<>(),           // 直接提交给线程 而不保持它们
             new NamedThreadFactory("runner-pool"),
             new ThreadPoolExecutor.AbortPolicy());
     }
